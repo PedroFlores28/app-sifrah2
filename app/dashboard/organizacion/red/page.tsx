@@ -231,10 +231,10 @@ export default function RedPage() {
                                     <button
                                         key={card.name}
                                         onClick={() => card.name === 'Red' && setViewMode('TREE')}
-                                        className={`flex flex-col items-center justify-center p-4 lg:p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 ${card.color} hover:scale-105 bg-opacity-30 w-[180px] h-[180px] cursor-pointer`}
-                                        style={{ backgroundColor: '#FDEEF9' }}
+                                        className={`flex flex-col items-center justify-center p-4 lg:p-6 rounded-xl transition-all duration-300 ${card.color} hover:scale-105 bg-opacity-30 w-[180px] h-[180px] cursor-pointer`}
+                                        style={{ backgroundColor: '#FDEEF9', boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.1)' }}
                                     >
-                                        <span className="font-bold text-gray-800 text-sm lg:text-lg mb-2">{card.name}</span>
+                                        <span className="font-bold text-gray-800 text-[20px] mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>{card.name}</span>
                                         <div className="text-pink-600 transform scale-75 lg:scale-100">
                                             {card.icon}
                                         </div>
@@ -258,7 +258,6 @@ export default function RedPage() {
                                     onClick={() => setViewMode('TREE')}
                                     className="w-full sm:w-auto px-12 py-4 bg-[#D209B6] text-white font-bold text-base lg:text-lg rounded-lg shadow-lg hover:bg-[#B00799] transition-transform hover:scale-105 uppercase flex items-center justify-center gap-3"
                                 >
-                                    <FaMapMarkedAlt />
                                     MAPA DE LA RED
                                 </button>
                             </div>
@@ -289,6 +288,6 @@ export default function RedPage() {
             {/* Mobile Elements */}
             <BottomNav />
             <WhatsAppButton />
-        </div>
+        </div >
     );
 }
