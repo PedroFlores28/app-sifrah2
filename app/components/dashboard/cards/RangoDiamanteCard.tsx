@@ -22,14 +22,14 @@ export default function RangoDiamanteCard({
   const strokeDashoffset = circumference - (porcentaje / 100) * circumference;
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-7 min-h-[235px]">
       <h3 className="text-xl font-bold text-gray-800 mb-4">Rango Diamante</h3>
       
       {/* Main Content - Horizontal Layout */}
-      <div className="flex items-start gap-6">
+      <div className="flex items-start gap-[23px]">
         {/* Progress Circle - Left Side */}
         <div className="flex flex-col items-center flex-shrink-0">
-          <div className="relative w-32 h-32">
+          <div className="relative w-36 h-36">
             <svg className="w-full h-full transform -rotate-90" viewBox="0 0 128 128">
               {/* Background circle */}
               <circle
@@ -67,9 +67,9 @@ export default function RangoDiamanteCard({
               </div>
             </div>
           </div>
-          <span className="text-3xl font-bold text-green-500 mt-2">{porcentaje}%</span>
+          <span className="text-3xl font-bold text-green-500 mt-1">{porcentaje}%</span>
           <span className="text-sm text-gray-500">Avance actual</span>
-          <span className="text-xs text-gray-400 mt-1 text-center">a 32% de subir a<br/>Segundo Diamante</span>
+          <span className="text-xs text-gray-400 mt-0 text-center">a 32% de subir a<br/>Segundo Diamante</span>
         </div>
 
         {/* Stats Grid - Right Side */}
