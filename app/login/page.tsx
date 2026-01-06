@@ -10,6 +10,7 @@ import { FaUser, FaEye, FaEyeSlash } from 'react-icons/fa';
 export default function LoginPage() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     usuario: '',
     contraseña: '',
@@ -17,8 +18,26 @@ export default function LoginPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Aquí iría la lógica de autenticación
-    console.log('Login:', formData);
+    setError('');
+
+    // Credenciales ficticias
+    const validUser = 'demo';
+    const validPassword = 'demo123';
+
+    if (formData.usuario === validUser && formData.contraseña === validPassword) {
+      // Guardar en localStorage
+      localStorage.setItem('isAuthenticated', 'true');
+      localStorage.setItem('user', JSON.stringify({
+        name: 'Sifrah',
+        email: '@gmail.com',
+        code: 'D44F71'
+      }));
+      
+      // Redirigir al dashboard
+      router.push('/dashboard');
+    } else {
+      setError('Usuario o contraseña incorrectos. Usa: demo / demo123');
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,6 +81,13 @@ export default function LoginPage() {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Error Message */}
+          {error && (
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg text-sm">
+              {error}
+            </div>
+          )}
+
           {/* Usuario Input */}
           <div>
             <label htmlFor="usuario-mobile" className="block text-gray-700 font-medium mb-2">
@@ -165,6 +191,13 @@ export default function LoginPage() {
           <h1 className="text-4xl font-semibold mb-8 text-center" style={{ color: '#3B3B3B' }}>BIENVENIDO</h1>
           
           <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Error Message */}
+            {error && (
+              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg text-sm">
+                {error}
+              </div>
+            )}
+
             {/* Usuario Input */}
             <div>
               <label htmlFor="usuario" className="block font-medium mb-2" style={{ color: '#89888D' }}>
