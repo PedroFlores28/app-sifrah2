@@ -9,8 +9,8 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          purple: '#7C3AED',
-          magenta: '#EC4899',
+          purple: '#9F00AD',
+          magenta: '#D209B6',
           dark: '#5B21B6',
         },
         accent: {
@@ -18,7 +18,7 @@ module.exports = {
         },
       },
       backgroundImage: {
-        'gradient-brand': 'linear-gradient(to bottom, #EC4899, #7C3AED)',
+        'gradient-brand': 'linear-gradient(to bottom, #D209B6, #9F00AD)',
       },
     },
   },

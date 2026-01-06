@@ -8,6 +8,55 @@
   margin: 0;
 }
 
+/* Custom checkbox styles */
+.checkbox-custom {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #D209B6;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+  position: relative;
+}
+
+.checkbox-custom:checked {
+  background-color: #D209B6;
+  border-color: #D209B6;
+}
+
+.checkbox-custom:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.checkbox-custom:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(210, 9, 182, 0.3);
+}
+
+/* Hide native date input icon */
+.date-input-custom::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.date-input-custom::-webkit-inner-spin-button,
+.date-input-custom::-webkit-clear-button {
+  display: none;
+}
+
 html,
 body {
   max-width: 100vw;

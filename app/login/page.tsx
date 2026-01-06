@@ -38,19 +38,27 @@ export default function LoginPage() {
       {/* Mobile Form Container */}
       <div className="lg:hidden bg-white rounded-t-3xl -mt-6 relative z-10 flex-1 px-6 py-8">
         {/* Mobile Tabs */}
-        <div className="flex mb-6 bg-primary-purple rounded-t-lg">
-          <Link
-            href="/login"
-            className="flex-1 text-center py-3 text-primary-purple bg-white font-semibold border-b-2 border-primary-purple rounded-tl-lg"
-          >
-            Inicio
-          </Link>
-          <Link
-            href="/registro"
-            className="flex-1 text-center py-3 text-white font-semibold"
-          >
-            Registro
-          </Link>
+        <div className="flex mb-6">
+          <div className="flex-1 flex flex-col items-center">
+            <Link
+              href="/login"
+              className="w-full text-center py-3 font-semibold"
+              style={{ color: '#9F00AD' }}
+            >
+              Inicio
+            </Link>
+            <div className="w-full h-1" style={{ backgroundColor: '#FFD900' }}></div>
+          </div>
+          <div className="flex-1 flex flex-col items-center">
+            <Link
+              href="/registro"
+              className="w-full text-center py-3 font-semibold"
+              style={{ color: '#666C68' }}
+            >
+              Registro
+            </Link>
+            <div className="w-full h-1" style={{ backgroundColor: '#666C68' }}></div>
+          </div>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -110,19 +118,24 @@ export default function LoginPage() {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-primary-purple text-white py-3 rounded-lg font-semibold text-lg hover:bg-primary-magenta transition-colors"
+            className="w-full bg-primary-purple text-white py-3 font-semibold text-lg hover:bg-primary-magenta transition-colors"
+            style={{ borderRadius: '30px' }}
           >
             Iniciar Sesión
           </button>
         </form>
 
         {/* Forgot Password Link */}
-        <div className="mt-4 text-center">
+        <div className="mt-4 text-center text-sm" style={{ color: '#89888D' }}>
+          <span style={{ userSelect: 'none' }}>¿Olvidaste tu contraseña? </span>
           <a
             href="#"
-            className="text-primary-purple hover:text-primary-magenta text-sm"
+            className="hover:underline transition-colors"
+            style={{ color: '#9F00AD' }}
+            onMouseEnter={(e) => e.currentTarget.style.color = '#D209B6'}
+            onMouseLeave={(e) => e.currentTarget.style.color = '#9F00AD'}
           >
-            ¿Olvidaste tu contraseña? Haz clic aquí
+            Haz clic aquí
           </a>
         </div>
 
@@ -132,12 +145,16 @@ export default function LoginPage() {
         </div>
 
         {/* Register Link */}
-        <div className="mt-6 text-center">
+        <div className="mt-6 text-center text-sm" style={{ color: '#89888D' }}>
+          <span style={{ userSelect: 'none' }}>¿No tienes cuenta? </span>
           <Link
             href="/registro"
-            className="text-primary-purple hover:text-primary-magenta text-sm"
+            className="hover:underline transition-colors"
+            style={{ color: '#9F00AD' }}
+            onMouseEnter={(e) => e.currentTarget.style.color = '#D209B6'}
+            onMouseLeave={(e) => e.currentTarget.style.color = '#9F00AD'}
           >
-            ¿No tienes cuenta? Regístrate
+            Regístrate
           </Link>
         </div>
       </div>
