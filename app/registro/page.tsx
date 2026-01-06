@@ -302,15 +302,21 @@ export default function RegistroPage() {
           <div className="relative">
             <input
               id="fechaNacimientoMobile"
-              type="date"
+              type="text"
               name="fechaNacimiento"
               placeholder="Fecha de Nacimiento"
               value={formData.fechaNacimiento}
               onChange={handleChange}
+              onFocus={(e) => {
+                e.target.type = 'date';
+                e.target.style.borderColor = '#9F00AD';
+              }}
+              onBlur={(e) => {
+                if (!e.target.value) e.target.type = 'text';
+                e.target.style.borderColor = '#9F00AD';
+              }}
               className="w-full px-4 py-3 border rounded-lg focus:outline-none text-gray-700 pr-12 date-input-custom"
               style={{ borderColor: '#9F00AD' }}
-              onFocus={(e) => e.target.style.borderColor = '#9F00AD'}
-              onBlur={(e) => e.target.style.borderColor = '#9F00AD'}
               required
             />
             <svg 
@@ -318,7 +324,10 @@ export default function RegistroPage() {
               width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg"
               onClick={() => {
                 const input = document.getElementById('fechaNacimientoMobile') as HTMLInputElement;
-                if (input) input.showPicker();
+                if (input) {
+                  input.type = 'date';
+                  input.showPicker();
+                }
               }}
             >
               <path d="M16.625 15.8334V4.75004C16.625 3.87683 15.9149 3.16671 15.0417 3.16671H13.4583V1.58337H11.875V3.16671H7.125V1.58337H5.54167V3.16671H3.95833C3.08512 3.16671 2.375 3.87683 2.375 4.75004V15.8334C2.375 16.7066 3.08512 17.4167 3.95833 17.4167H15.0417C15.9149 17.4167 16.625 16.7066 16.625 15.8334ZM7.125 14.25H5.54167V12.6667H7.125V14.25ZM7.125 11.0834H5.54167V9.50004H7.125V11.0834ZM10.2917 14.25H8.70833V12.6667H10.2917V14.25ZM10.2917 11.0834H8.70833V9.50004H10.2917V11.0834ZM13.4583 14.25H11.875V12.6667H13.4583V14.25ZM13.4583 11.0834H11.875V9.50004H13.4583V11.0834ZM15.0417 7.12504H3.95833V5.54171H15.0417V7.12504Z" fill="#9F00AD" fillOpacity="0.5"/>
@@ -587,15 +596,21 @@ export default function RegistroPage() {
             <div className="relative">
               <input
                 id="fechaNacimientoDesktop"
-                type="date"
+                type="text"
                 name="fechaNacimiento"
                 placeholder="Fecha de Nacimiento"
                 value={formData.fechaNacimiento}
                 onChange={handleChange}
+                onFocus={(e) => {
+                  e.target.type = 'date';
+                  e.target.style.borderColor = '#9F00AD';
+                }}
+                onBlur={(e) => {
+                  if (!e.target.value) e.target.type = 'text';
+                  e.target.style.borderColor = '#9F00AD';
+                }}
                 className="w-full px-4 py-3 border rounded-lg focus:outline-none text-gray-700 pr-12 date-input-custom"
                 style={{ borderColor: '#9F00AD', fontFamily: 'Roboto, sans-serif', fontWeight: 400 }}
-                onFocus={(e) => e.target.style.borderColor = '#9F00AD'}
-                onBlur={(e) => e.target.style.borderColor = '#9F00AD'}
                 required
               />
               <svg 
@@ -603,7 +618,10 @@ export default function RegistroPage() {
                 width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg"
                 onClick={() => {
                   const input = document.getElementById('fechaNacimientoDesktop') as HTMLInputElement;
-                  if (input) input.showPicker();
+                  if (input) {
+                    input.type = 'date';
+                    input.showPicker();
+                  }
                 }}
               >
                 <path d="M16.625 15.8334V4.75004C16.625 3.87683 15.9149 3.16671 15.0417 3.16671H13.4583V1.58337H11.875V3.16671H7.125V1.58337H5.54167V3.16671H3.95833C3.08512 3.16671 2.375 3.87683 2.375 4.75004V15.8334C2.375 16.7066 3.08512 17.4167 3.95833 17.4167H15.0417C15.9149 17.4167 16.625 16.7066 16.625 15.8334ZM7.125 14.25H5.54167V12.6667H7.125V14.25ZM7.125 11.0834H5.54167V9.50004H7.125V11.0834ZM10.2917 14.25H8.70833V12.6667H10.2917V14.25ZM10.2917 11.0834H8.70833V9.50004H10.2917V11.0834ZM13.4583 14.25H11.875V12.6667H13.4583V14.25ZM13.4583 11.0834H11.875V9.50004H13.4583V11.0834ZM15.0417 7.12504H3.95833V5.54171H15.0417V7.12504Z" fill="#9F00AD" fillOpacity="0.5"/>
