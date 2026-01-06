@@ -172,9 +172,9 @@ export default function ComprasPage() {
                         </div>
                     </div>
 
-                    <div className="flex flex-col lg:flex-row gap-6">
+                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
                         {/* Left Column: Catalog */}
-                        <div className="flex-1">
+                        <div className="lg:col-span-3">
                             {/* Mobile Filters Layout */}
                             <div className="flex lg:hidden flex-col gap-4 mb-6">
                                 <div className="relative w-full">
@@ -293,7 +293,7 @@ export default function ComprasPage() {
                         </div>
 
                         {/* Right Column: Shopping Cart */}
-                        <div className="hidden lg:block w-full lg:w-80 flex-shrink-0">
+                        <div className="hidden lg:block lg:col-span-1 relative">
                             <div className="bg-white rounded-lg border border-gray-100 shadow-sm sticky top-24 z-30">
                                 <div className="p-4 border-b border-gray-100 flex items-center justify-between bg-gray-50 rounded-t-lg">
                                     <h2 className="font-bold text-pink-600">Carrito de Compras</h2>
