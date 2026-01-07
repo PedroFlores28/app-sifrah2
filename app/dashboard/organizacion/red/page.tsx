@@ -235,7 +235,7 @@ export default function RedPage() {
                                         style={{ backgroundColor: '#FDEEF9', boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.1)' }}
                                     >
                                         <span className="font-bold text-gray-800 text-[20px] mb-2" style={{ fontFamily: 'Roboto, sans-serif' }}>{card.name}</span>
-                                        <div className="text-pink-600 transform scale-75 lg:scale-100">
+                                        <div className="text-pink-600 transform scale-90 lg:scale-100">
                                             {card.icon}
                                         </div>
                                     </button>
@@ -243,11 +243,11 @@ export default function RedPage() {
                             </div>
 
                             {/* Action Buttons */}
-                            <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 lg:gap-6 mb-8 lg:mb-16 w-full max-w-4xl px-4 lg:px-0">
-                                <button className="w-full sm:w-auto px-8 py-3 bg-[#9F00AD] text-white font-semibold rounded-lg shadow-md hover:bg-[#80008A] transition-colors text-sm lg:text-base">
+                            <div className="flex flex-col items-center sm:flex-row flex-wrap justify-center gap-4 lg:gap-6 mb-8 lg:mb-16 w-full max-w-4xl px-4 lg:px-0">
+                                <button className="w-64 sm:w-auto px-8 py-3 bg-[#9F00AD] text-white font-semibold rounded-lg shadow-md hover:bg-[#80008A] transition-colors text-sm lg:text-base">
                                     Periodos Históricos
                                 </button>
-                                <button className="w-full sm:w-auto px-8 py-3 bg-[#9F00AD] text-white font-semibold rounded-lg shadow-md hover:bg-[#80008A] transition-colors text-sm lg:text-base">
+                                <button className="w-64 sm:w-auto px-8 py-3 bg-[#9F00AD] text-white font-semibold rounded-lg shadow-md hover:bg-[#80008A] transition-colors text-sm lg:text-base">
                                     Recuperar Historial
                                 </button>
                             </div>

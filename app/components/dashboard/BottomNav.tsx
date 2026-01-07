@@ -42,14 +42,14 @@ export default function BottomNav() {
 
   return (
     <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-[#D209B6] border-t border-purple-500 z-40">
-      <div className="flex items-center justify-around py-2">
+      <div className="flex items-center justify-around py-1">
         {navItems.map((item) => {
           const isActive = pathname === item.href;
           return (
             <Link
               key={item.name}
               href={item.href}
-              className={`flex-1 flex flex-col items-center py-2 transition-colors duration-200 ${isActive ? 'text-white' : 'text-purple-200 hover:text-white'
+              className={`flex-1 flex flex-col items-center py-1 transition-colors duration-200 ${isActive ? 'text-white' : 'text-purple-200 hover:text-white'
                 }`}
             >
               {React.cloneElement(item.icon, { size: 22 })}
