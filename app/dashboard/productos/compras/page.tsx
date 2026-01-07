@@ -104,66 +104,25 @@ export default function ComprasPage() {
             </div>
 
             {/* Mobile Header */}
-            <header className="lg:hidden bg-[#D209B6] text-white p-4 flex items-center justify-between sticky top-0 z-40">
-                <div className="flex items-center gap-2">
-                    <Image src="/logo-sifrah.svg" alt="Sifrah" width={30} height={30} className="brightness-0 invert" />
-                </div>
-                <div className="flex flex-col items-center">
-                    <div className="flex items-center gap-2 bg-white/10 rounded-full px-3 py-1">
-                        <div className="w-8 h-8 rounded-full overflow-hidden border border-white">
-                            <div className="w-full h-full bg-gray-300"></div>
-                            {/* Placeholder Avatar */}
-                        </div>
-                        <div className="text-[10px] leading-tight">
-                            <p className="font-bold">Cód: {user?.code || '4715'}</p>
-                            <p>{user?.email || '72573398'}</p>
-                        </div>
-                    </div>
-                </div>
-                <div className="flex items-center gap-3 text-xl">
-                    <FaShareAlt />
-                    <FaCog />
-                    <FaBars />
-                </div>
-            </header>
+
 
             {/* Main Content */}
             <div className="lg:ml-64 flex flex-col min-h-screen">
 
                 {/* Desktop Header */}
-                <header className="hidden lg:flex items-center justify-between px-8 py-4 bg-white border-b border-gray-200">
-                    <h1 className="text-2xl font-bold text-gray-800" style={{ color: '#9F00AD' }}>Tienda Sifrah</h1>
-
-                    <div className="flex items-center gap-4">
-                        <button
-                            className="flex items-center gap-2 px-4 py-2 text-white rounded-lg transition-colors"
-                            style={{ backgroundColor: '#D209B6' }}
-                        >
-                            <FaShareAlt size={16} />
-                            <span className="font-medium">Compartir Afiliación</span>
-                        </button>
-
-                        <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-pink-500">
-                                <Image src="/logo-sifrah.svg" alt="User" width={40} height={40} className="w-full h-full object-cover p-1" />
-                            </div>
-                            <div className="flex flex-col">
-                                <span className="font-bold text-sm text-gray-800">{user?.name || 'Alberto Ramírez'}</span>
-                                <span className="text-xs text-gray-500">{user?.email || 'albertoramirez@gmail.com'}</span>
-                            </div>
-                            <div className="flex gap-2 text-gray-400">
-                                <button><FaStar className="text-yellow-400" /></button>
-                                <button><FaFilter /></button>
-                            </div>
-                        </div>
-                    </div>
-                </header>
+                <Header
+                    title="Tienda Sifrah"
+                    userCode={user?.code || 'D44F71'}
+                    userName={user?.name || 'Sifrah'}
+                    userEmail={user?.email || '@gmail.com'}
+                />
 
                 <main className="p-4 lg:p-6">
                     {/* Banners Layout */}
                     <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 lg:gap-6 mb-8">
                         {/* Main Banner - Spans 2 columns on desktop, full on mobile */}
-                        <div className="lg:col-span-2 relative rounded-2xl overflow-hidden h-40 lg:h-64 shadow-lg group">
+                        {/* Main Banner - Spans 2 columns on desktop, full on mobile */}
+                        <div className="lg:col-span-2 relative rounded-md overflow-hidden h-40 lg:h-64 shadow-lg group" style={{ borderRadius: '6px' }}>
                             <Image
                                 src="/bannerizquierdo.jpg"
                                 alt="Banner Ofertas"
@@ -179,7 +138,8 @@ export default function ComprasPage() {
                         <div className="grid grid-cols-2 lg:grid-cols-1 gap-4 lg:gap-6 lg:col-span-1 lg:contents">
                             {/* Middle Section - Stacked Banners on Desktop */}
                             <div className="lg:col-span-1 flex flex-col gap-4 h-full lg:h-64">
-                                <div className="flex-1 rounded-2xl overflow-hidden relative shadow-md h-32 lg:h-auto">
+
+                                <div className="flex-1 rounded-md overflow-hidden relative shadow-md h-32 lg:h-auto" style={{ borderRadius: '6px' }}>
                                     <Image
                                         src="/bannersuperior.jpg"
                                         alt="Crecimiento"
@@ -189,7 +149,7 @@ export default function ComprasPage() {
                                         quality={100}
                                     />
                                 </div>
-                                <div className="flex-1 rounded-2xl overflow-hidden relative shadow-sm h-32 lg:h-auto">
+                                <div className="flex-1 rounded-md overflow-hidden relative shadow-sm h-32 lg:h-auto" style={{ borderRadius: '6px' }}>
                                     <Image
                                         src="/bannerinferior.jpg"
                                         alt="Historias"
@@ -202,7 +162,7 @@ export default function ComprasPage() {
                             </div>
 
                             {/* Right Banner - Spans 1 column */}
-                            <div className="lg:col-span-1 relative rounded-2xl overflow-hidden h-64 lg:h-64 shadow-lg group">
+                            <div className="lg:col-span-1 relative rounded-md overflow-hidden h-64 lg:h-64 shadow-lg group" style={{ borderRadius: '6px' }}>
                                 <Image
                                     src="/baneerderecho.jpg"
                                     alt="Diamante"
@@ -471,15 +431,15 @@ export default function ComprasPage() {
 
                     </div>
                 </main>
-            </div>
+            </div >
 
             {/* Mobile Bottom Navigation */}
-            <div className="lg:hidden">
+            < div className="lg:hidden" >
                 <BottomNav />
-            </div>
+            </div >
             <div className="lg:hidden">
                 <WhatsAppButton />
             </div>
-        </div>
+        </div >
     );
 }
