@@ -55,6 +55,7 @@ export default function ComprasPage() {
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedFilter, setSelectedFilter] = useState('Todos');
     const [cart, setCart] = useState<CartItem[]>([]);
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
     // Cart Logic
     const addToCart = (product: any) => {
@@ -96,8 +97,20 @@ export default function ComprasPage() {
         }
     }, []);
 
+    // Prevent body scroll when drawer is open
+    useEffect(() => {
+        if (isDrawerOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isDrawerOpen]);
+
     return (
-        <div className="min-h-screen bg-white font-sans pb-20 lg:pb-0">
+        <div className="min-h-screen bg-white font-sans pb-20 lg:pb-0 relative">
             {/* Sidebar - Desktop */}
             <div className="hidden lg:block">
                 <Sidebar />
@@ -120,7 +133,6 @@ export default function ComprasPage() {
                 <main className="p-4 lg:p-6">
                     {/* Banners Layout */}
                     <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 lg:gap-6 mb-8">
-                        {/* Main Banner - Spans 2 columns on desktop, full on mobile */}
                         {/* Main Banner - Spans 2 columns on desktop, full on mobile */}
                         <div className="lg:col-span-2 relative rounded-md overflow-hidden h-40 lg:h-64 shadow-lg group" style={{ borderRadius: '6px' }}>
                             <Image
@@ -215,7 +227,10 @@ export default function ComprasPage() {
                                     <p className="font-bold text-[#1E1E1E] text-sm">Monto: S/.{totalPrice.toFixed(2)}</p>
                                     <p className="font-bold text-[#1E1E1E] text-sm">Puntos: {totalPoints} pts</p>
                                 </div>
-                                <button className="bg-[#D209B6] text-white px-6 py-2 rounded-lg font-bold flex items-center gap-2 text-sm shadow-md">
+                                <button
+                                    onClick={() => setIsDrawerOpen(true)}
+                                    className="bg-[#D209B6] text-white px-6 py-2 rounded-lg font-bold flex items-center gap-2 text-sm shadow-md"
+                                >
                                     <FaShoppingCart /> Ver carrito
                                 </button>
                             </div>
@@ -315,18 +330,12 @@ export default function ComprasPage() {
                                                 </button>
                                             )}
                                         </div>
-                                        {/* Mobile Quantity Selector (Hidden by default, shown if added - Mock state) */}
-                                        <div className="hidden w-full bg-[#EABFFF] rounded-lg items-center justify-between px-2 py-1 text-purple-900 font-bold">
-                                            <button><FaMinus size={10} /></button>
-                                            <span>1</span>
-                                            <button><FaPlus size={10} /></button>
-                                        </div>
                                     </div>
                                 ))}
                             </div>
                         </div>
 
-                        {/* Right Column: Shopping Cart */}
+                        {/* Right Column: Shopping Cart (Sticky Summary) */}
                         <div className="hidden lg:block lg:col-span-1 relative">
                             <div className="bg-white rounded-lg border border-gray-100 shadow-sm sticky top-4 z-30">
                                 <div className="p-4 border-b border-gray-100 flex flex-col items-center justify-between bg-gray-50 rounded-t-lg relative">
@@ -342,61 +351,63 @@ export default function ComprasPage() {
                                     <p className="text-[11px] text-[#868686] text-center leading-tight" style={{ fontFamily: 'Inter', fontWeight: 500 }}>Puedes hacer scroll para ver todos tus productos.</p>
                                 </div>
 
-                                {cart.length === 0 ? (
-                                    <div className="p-12 flex flex-col items-center justify-center text-center min-h-[300px]">
-                                        <FaShoppingCart size={56} className="text-gray-200 mb-4" />
-                                        <h3 className="text-[#FA8AC0] font-bold mb-1 text-[16px]" style={{ fontFamily: 'Inter', fontWeight: 700 }}>Tu carrito está vacío</h3>
-                                        <p className="text-[12px] text-[#757575]" style={{ fontFamily: 'Inter', fontWeight: 500 }}>Agregar productos para comenzar</p>
-                                    </div>
-                                ) : (
-                                    <div className="p-4 flex flex-col gap-4 min-h-[300px] max-h-[500px] overflow-y-auto no-scrollbar">
-                                        {cart.map((item) => (
-                                            <div key={item.product.id} className="flex items-center gap-3 p-2 border border-pink-100 rounded-lg bg-white shadow-sm relative">
-                                                {/* Product Image */}
-                                                <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0 relative overflow-hidden">
-                                                    <Image
-                                                        src={item.product.image}
-                                                        alt={item.product.name}
-                                                        fill
-                                                        className="object-contain p-1"
-                                                    />
-                                                </div>
+                                <div className="p-4 flex flex-col gap-4 min-h-[300px] max-h-[500px] overflow-y-auto no-scrollbar">
+                                    {cart.length === 0 ? (
+                                        <div className="p-12 flex flex-col items-center justify-center text-center min-h-[300px]">
+                                            <FaShoppingCart size={56} className="text-gray-200 mb-4" />
+                                            <h3 className="text-[#FA8AC0] font-bold mb-1 text-[16px]" style={{ fontFamily: 'Inter', fontWeight: 700 }}>Tu carrito está vacío</h3>
+                                            <p className="text-[12px] text-[#757575]" style={{ fontFamily: 'Inter', fontWeight: 500 }}>Agregar productos para comenzar</p>
+                                        </div>
+                                    ) : (
+                                        <div className="flex flex-col gap-4">
+                                            {cart.map((item) => (
+                                                <div key={item.product.id} className="flex items-center gap-3 p-2 border border-pink-100 rounded-lg bg-white shadow-sm relative">
+                                                    {/* Product Image */}
+                                                    <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0 relative overflow-hidden">
+                                                        <Image
+                                                            src={item.product.image}
+                                                            alt={item.product.name}
+                                                            fill
+                                                            className="object-contain p-1"
+                                                        />
+                                                    </div>
 
-                                                {/* Details */}
-                                                <div className="flex-1 min-w-0">
-                                                    <h4 className="uppercase leading-tight mb-1 text-[14px] text-[#000000]" style={{ fontFamily: 'Inter', fontWeight: 700 }}>{item.product.name}</h4>
-                                                    <p className="text-[#9F00AD] font-bold text-[17px] mb-0.5">S/{item.product.price.toFixed(2)}</p>
-                                                    <span className="text-[14px] bg-[#FBEBF8] text-[#D209B6] font-bold px-1.5 py-0.5 rounded-sm">{item.product.points}pts</span>
-                                                </div>
+                                                    {/* Details */}
+                                                    <div className="flex-1 min-w-0">
+                                                        <h4 className="uppercase leading-tight mb-1 text-[14px] text-[#000000]" style={{ fontFamily: 'Inter', fontWeight: 700 }}>{item.product.name}</h4>
+                                                        <p className="text-[#9F00AD] font-bold text-[17px] mb-0.5">S/{item.product.price.toFixed(2)}</p>
+                                                        <span className="text-[14px] bg-[#FBEBF8] text-[#D209B6] font-bold px-1.5 py-0.5 rounded-sm">{item.product.points}pts</span>
+                                                    </div>
 
-                                                {/* Controls */}
-                                                <div className="flex flex-col items-center gap-2">
-                                                    <div className="flex items-center gap-2">
+                                                    {/* Controls */}
+                                                    <div className="flex flex-col items-center gap-2">
+                                                        <div className="flex items-center gap-2">
+                                                            <button
+                                                                onClick={() => updateQuantity(item.product.id, -1)}
+                                                                className="w-5 h-5 bg-[#D209B6] text-white rounded flex items-center justify-center hover:bg-[#B00799]"
+                                                            >
+                                                                <FaMinus size={8} />
+                                                            </button>
+                                                            <span className="w-6 text-center text-[17px] font-bold text-gray-700 bg-gray-50 border border-gray-200 rounded">{item.quantity}</span>
+                                                            <button
+                                                                onClick={() => updateQuantity(item.product.id, 1)}
+                                                                className="w-5 h-5 bg-[#D209B6] text-white rounded flex items-center justify-center hover:bg-[#B00799]"
+                                                            >
+                                                                <FaPlus size={8} />
+                                                            </button>
+                                                        </div>
                                                         <button
-                                                            onClick={() => updateQuantity(item.product.id, -1)}
-                                                            className="w-5 h-5 bg-[#D209B6] text-white rounded flex items-center justify-center hover:bg-[#B00799]"
+                                                            onClick={() => removeFromCart(item.product.id)}
+                                                            className="text-red-500 hover:text-red-700 transition-colors"
                                                         >
-                                                            <FaMinus size={8} />
-                                                        </button>
-                                                        <span className="w-6 text-center text-[17px] font-bold text-gray-700 bg-gray-50 border border-gray-200 rounded">{item.quantity}</span>
-                                                        <button
-                                                            onClick={() => updateQuantity(item.product.id, 1)}
-                                                            className="w-5 h-5 bg-[#D209B6] text-white rounded flex items-center justify-center hover:bg-[#B00799]"
-                                                        >
-                                                            <FaPlus size={8} />
+                                                            <FaTrash size={12} />
                                                         </button>
                                                     </div>
-                                                    <button
-                                                        onClick={() => removeFromCart(item.product.id)}
-                                                        className="text-red-500 hover:text-red-700 transition-colors"
-                                                    >
-                                                        <FaTrash size={12} />
-                                                    </button>
                                                 </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                )}
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
 
                                 <div className="p-5 bg-[#F9FAFB] border-t border-gray-100 rounded-b-lg">
                                     <div className="space-y-3 mb-6">
@@ -418,7 +429,10 @@ export default function ComprasPage() {
                                     </div>
 
                                     <div className="space-y-3">
-                                        <button className="w-full py-2.5 bg-[#D209B6] text-white text-[16px] font-bold hover:bg-[#B00799] transition-colors rounded-lg shadow-sm" style={{ fontFamily: 'Inter', fontWeight: 700 }}>
+                                        <button
+                                            onClick={() => setIsDrawerOpen(true)}
+                                            className="w-full py-2.5 bg-[#D209B6] text-white text-[16px] font-bold hover:bg-[#B00799] transition-colors rounded-lg shadow-sm" style={{ fontFamily: 'Inter', fontWeight: 700 }}
+                                        >
                                             Ver detalle
                                         </button>
                                         <button className="w-full py-2.5 bg-[#D209B6] text-white text-[16px] font-bold hover:bg-[#B00799] transition-colors rounded-lg shadow-sm" style={{ fontFamily: 'Inter', fontWeight: 700 }}>
@@ -434,12 +448,130 @@ export default function ComprasPage() {
             </div >
 
             {/* Mobile Bottom Navigation */}
-            < div className="lg:hidden" >
-                <BottomNav />
-            </div >
             <div className="lg:hidden">
-                <WhatsAppButton />
+                <BottomNav />
             </div>
+
+            {/* WhatsApp Button Removed as per request */}
+            {/* <div className="lg:hidden">
+                <WhatsAppButton />
+            </div> */}
+
+            {/* Cart Drawer Overlay */}
+            {isDrawerOpen && (
+                <div className="fixed inset-0 z-50 flex justify-end">
+                    {/* Backdrop */}
+                    <div
+                        className="absolute inset-0 bg-black/50 transition-opacity"
+                        onClick={() => setIsDrawerOpen(false)}
+                    ></div>
+
+                    {/* Drawer Panel */}
+                    <div className="relative w-full max-w-md bg-white h-full shadow-2xl flex flex-col animate-in slide-in-from-right duration-300">
+                        {/* Header */}
+                        <div className="p-4 border-b border-gray-100 flex flex-col items-center justify-between bg-white relative pt-8 lg:pt-4">
+                            <button
+                                className="absolute right-4 top-4 text-gray-400 hover:text-gray-600"
+                                onClick={() => setIsDrawerOpen(false)}
+                            >
+                                <FaTimes size={16} />
+                            </button>
+                            <h2 className="text-[#D209B6] text-center text-[18px] mb-1" style={{ fontFamily: 'Inter', fontWeight: 700 }}>Carrito de Compras</h2>
+                            <p className="text-[11px] text-[#868686] text-center leading-tight" style={{ fontFamily: 'Inter', fontWeight: 500 }}>Puedes hacer scroll para ver todos tus productos.</p>
+                        </div>
+
+                        {/* Cart Items List */}
+                        <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4 bg-[#fcfcfc]">
+                            {cart.length === 0 ? (
+                                <div className="flex flex-col items-center justify-center h-full text-center">
+                                    <FaShoppingCart size={56} className="text-gray-200 mb-4" />
+                                    <h3 className="text-[#FA8AC0] font-bold mb-1 text-[16px]" style={{ fontFamily: 'Inter', fontWeight: 700 }}>Tu carrito está vacío</h3>
+                                    <p className="text-[12px] text-[#757575]" style={{ fontFamily: 'Inter', fontWeight: 500 }}>Agrega productos para comenzar</p>
+                                </div>
+                            ) : (
+                                cart.map((item) => (
+                                    <div key={item.product.id} className="flex items-center gap-3 p-3 border-b border-gray-50 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                                        {/* Product Image */}
+                                        <div className="w-20 h-20 bg-transparent rounded-lg flex items-center justify-center flex-shrink-0 relative overflow-hidden">
+                                            <Image
+                                                src={item.product.image}
+                                                alt={item.product.name}
+                                                fill
+                                                className="object-contain"
+                                            />
+                                        </div>
+
+                                        {/* Details */}
+                                        <div className="flex-1 min-w-0 flex flex-col justify-center">
+                                            <h4 className="uppercase leading-tight mb-1 text-[14px] text-[#000000]" style={{ fontFamily: 'Inter', fontWeight: 700 }}>{item.product.name}</h4>
+                                            <p className="text-[#9F00AD] font-bold text-[17px] mb-1">S/{item.product.price.toFixed(2)}</p>
+                                            <span className="text-[12px] text-[#D209B6] font-bold">{item.product.points}pts</span>
+                                        </div>
+
+                                        {/* Controls */}
+                                        <div className="flex flex-col items-center gap-2">
+                                            <div className="flex items-center gap-2">
+                                                <button
+                                                    onClick={() => updateQuantity(item.product.id, -1)}
+                                                    className="w-6 h-6 bg-[#D209B6] text-white rounded flex items-center justify-center hover:bg-[#B00799]"
+                                                >
+                                                    <FaMinus size={10} />
+                                                </button>
+                                                <span className="w-8 text-center text-[16px] font-bold text-gray-700 bg-white border border-gray-200 rounded">{item.quantity}</span>
+                                                <button
+                                                    onClick={() => updateQuantity(item.product.id, 1)}
+                                                    className="w-6 h-6 bg-[#D209B6] text-white rounded flex items-center justify-center hover:bg-[#B00799]"
+                                                >
+                                                    <FaPlus size={10} />
+                                                </button>
+                                            </div>
+                                            <button
+                                                onClick={() => removeFromCart(item.product.id)}
+                                                className="text-red-500 hover:text-red-700 transition-colors mt-1"
+                                            >
+                                                <FaTrash size={12} />
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))
+                            )}
+                        </div>
+
+                        {/* Footer / Summary */}
+                        <div className="p-6 bg-white border-t border-gray-100 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+                            <div className="space-y-3 mb-6">
+                                <div className="flex justify-between items-center">
+                                    <span className="text-[#000000] text-[16px]" style={{ fontFamily: 'Inter', fontWeight: 700 }}>Resumen</span>
+                                </div>
+                                <div className="flex justify-between items-center">
+                                    <span className="text-[#000000] text-[13px]" style={{ fontFamily: 'Inter', fontWeight: 600 }}>Concepto:</span>
+                                    <span className="text-[#D209B6] text-[13px]" style={{ fontFamily: 'Inter', fontWeight: 700 }}>Sin Pack</span>
+                                </div>
+                                <div className="flex justify-between items-center">
+                                    <span className="text-[#000000] text-[13px]" style={{ fontFamily: 'Inter', fontWeight: 600 }}>Puntos:</span>
+                                    <span className="text-[#D209B6] text-[13px]" style={{ fontFamily: 'Inter', fontWeight: 700 }}>{totalPoints.toFixed(2)}</span>
+                                </div>
+                                <div className="flex justify-between items-center pt-2 border-t border-gray-200 mt-2">
+                                    <span className="text-[#000000] text-[14px]" style={{ fontFamily: 'Inter', fontWeight: 700 }}>Total:</span>
+                                    <span className="text-[#D209B6] text-[14px]" style={{ fontFamily: 'Inter', fontWeight: 700 }}>S/. {totalPrice.toFixed(2)}</span>
+                                </div>
+                            </div>
+
+                            <div className="space-y-2">
+                                <button className="w-full py-3 bg-[#D209B6] text-white text-[16px] font-bold hover:bg-[#B00799] transition-colors rounded-3xl shadow-md" style={{ fontFamily: 'Inter', fontWeight: 700 }}>
+                                    Ir a Pagar
+                                </button>
+                                <button
+                                    onClick={() => setIsDrawerOpen(false)}
+                                    className="w-full py-3 bg-[#D209B6] text-white text-[16px] font-bold hover:bg-[#B00799] transition-colors rounded-3xl shadow-md" style={{ fontFamily: 'Inter', fontWeight: 700 }}
+                                >
+                                    Añadir más productos
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div >
     );
 }
