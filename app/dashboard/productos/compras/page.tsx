@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import Sidebar from '../../../components/dashboard/Sidebar';
 import Header from '../../../components/dashboard/Header';
 import BottomNav from '../../../components/dashboard/BottomNav';
@@ -51,6 +52,7 @@ interface CartItem {
 }
 
 export default function ComprasPage() {
+    const router = useRouter();
     const [user, setUser] = useState<{ name: string; email: string; code: string } | null>(null);
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedFilter, setSelectedFilter] = useState('Todos');
@@ -411,17 +413,6 @@ export default function ComprasPage() {
 
                                 <div className="p-5 bg-[#F9FAFB] border-t border-gray-100 rounded-b-lg">
                                     <div className="space-y-3 mb-6">
-                                        <div className="flex justify-between items-center">
-                                            <span className="text-[#000000] text-[16px]" style={{ fontFamily: 'Inter', fontWeight: 700 }}>Resumen</span>
-                                        </div>
-                                        <div className="flex justify-between items-center">
-                                            <span className="text-[#000000] text-[13px]" style={{ fontFamily: 'Inter', fontWeight: 600 }}>Concepto:</span>
-                                            <span className="text-[#D209B6] text-[13px]" style={{ fontFamily: 'Inter', fontWeight: 700 }}>Sin Pack</span>
-                                        </div>
-                                        <div className="flex justify-between items-center">
-                                            <span className="text-[#000000] text-[13px]" style={{ fontFamily: 'Inter', fontWeight: 600 }}>Puntos:</span>
-                                            <span className="text-[#D209B6] text-[13px]" style={{ fontFamily: 'Inter', fontWeight: 700 }}>{totalPoints.toFixed(2)}</span>
-                                        </div>
                                         <div className="flex justify-between items-center pt-2 border-t border-gray-200 mt-2">
                                             <span className="text-[#000000] text-[14px]" style={{ fontFamily: 'Inter', fontWeight: 700 }}>Total:</span>
                                             <span className="text-[#D209B6] text-[14px]" style={{ fontFamily: 'Inter', fontWeight: 700 }}>S/. {totalPrice.toFixed(2)}</span>
@@ -435,7 +426,10 @@ export default function ComprasPage() {
                                         >
                                             Ver detalle
                                         </button>
-                                        <button className="w-full py-2.5 bg-[#D209B6] text-white text-[16px] font-bold hover:bg-[#B00799] transition-colors rounded-lg shadow-sm" style={{ fontFamily: 'Inter', fontWeight: 700 }}>
+                                        <button
+                                            onClick={() => router.push('/dashboard/checkout')}
+                                            className="w-full py-2.5 bg-[#D209B6] text-white text-[16px] font-bold hover:bg-[#B00799] transition-colors rounded-lg shadow-sm" style={{ fontFamily: 'Inter', fontWeight: 700 }}
+                                        >
                                             Ir a Pagar
                                         </button>
                                     </div>
@@ -558,7 +552,10 @@ export default function ComprasPage() {
                             </div>
 
                             <div className="space-y-2">
-                                <button className="w-full py-3 bg-[#D209B6] text-white text-[16px] font-bold hover:bg-[#B00799] transition-colors rounded-3xl shadow-md" style={{ fontFamily: 'Inter', fontWeight: 700 }}>
+                                <button
+                                    onClick={() => router.push('/dashboard/checkout')}
+                                    className="w-full py-3 bg-[#D209B6] text-white text-[16px] font-bold hover:bg-[#B00799] transition-colors rounded-3xl shadow-md" style={{ fontFamily: 'Inter', fontWeight: 700 }}
+                                >
                                     Ir a Pagar
                                 </button>
                                 <button
